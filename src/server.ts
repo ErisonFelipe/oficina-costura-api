@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import type { FastifyError } from 'fastify';
 import cors from '@fastify/cors';
 import multipart from '@fastify/multipart';
 import fastifyStatic from '@fastify/static';
@@ -82,7 +83,7 @@ async function bootstrap() {
   }));
 
   // ===== ERROR HANDLER =====
-  app.setErrorHandler((error, request, reply) => {
+  app.setErrorHandler((error: FastifyError, request, reply) => {
     app.log.error(error);
 
     if (error.validation) {
