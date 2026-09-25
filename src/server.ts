@@ -30,11 +30,12 @@ async function bootstrap() {
   });
 
   // ===== PLUGINS =====
-  await app.register(cors, {
-    origin: [env.FRONTEND_URL, 'http://localhost:5173'],
-    credentials: true,
-  });
-
+await app.register(cors, {
+  origin: [env.FRONTEND_URL, 'http://localhost:5173'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+});
   await app.register(multipart, {
     limits: {
       fileSize: env.MAX_FILE_SIZE,
